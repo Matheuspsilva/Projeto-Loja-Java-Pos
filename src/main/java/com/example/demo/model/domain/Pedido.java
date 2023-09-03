@@ -2,23 +2,108 @@ package com.example.demo.model.domain;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public class Pedido {
-    String descricao;
-    LocalDateTime data;
-    boolean web;
-    List<Produto> produtos;
-    Solicitante solicitante;
 
-    public Pedido(String descricao, LocalDateTime data, boolean web, List<Produto> produtos, Solicitante solicitante) {
+    //1.1 Todas as classes precisam ter pelo menos três atributos e todos
+    //os tipos de dados precisam ser utilizados em pelo menos uma
+    //ocorrência.
+
+    private String descricao;
+    private LocalDateTime data;
+    private boolean web;
+
+    //3.3 Criação do relacionamento entre a classe principal e a mãe com
+    //List.
+    private List<OrderItem> orderItems;
+    private Solicitante solicitante;
+    //3.1 Criação de um atributo do tipo vetor.
+    private String[] cumpons;
+
+    //3.2 Criação de um atributo do tipo Set.
+    private Set<String> tags;
+
+
+    public Pedido(String descricao, LocalDateTime data, boolean web, List<OrderItem> orderItems, Solicitante solicitante) {
         this.descricao = descricao;
         this.data = data;
         this.web = web;
-        this.produtos = produtos;
+        this.orderItems = orderItems;
+        this.solicitante = solicitante;
+
+        // Estabeleça a relação bidirecional entre Pedido e OrderItem
+        for (OrderItem item : orderItems) {
+            item.setPedido(this);
+        }
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public LocalDateTime getData() {
+        return data;
+    }
+
+    public void setData(LocalDateTime data) {
+        this.data = data;
+    }
+
+    public boolean isWeb() {
+        return web;
+    }
+
+    public void setWeb(boolean web) {
+        this.web = web;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
+
+    public Solicitante getSolicitante() {
+        return solicitante;
+    }
+
+    public void setSolicitante(Solicitante solicitante) {
         this.solicitante = solicitante;
     }
 
+    public String[] getCumpons() {
+        return cumpons;
+    }
+
+    public void setCumpons(String[] cumpons) {
+        this.cumpons = cumpons;
+    }
+
+    public Set<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<String> tags) {
+        this.tags = tags;
+    }
+
+    //1.3 Todas as classes de domínio precisam ter o toString
+    //implementado.
+    @Override
     public String toString() {
-        return "Pedido{" + "descricao=" + descricao + ", data=" + data + ", web=" + web + ", produtos=" + produtos + ", solicitante=" + solicitante + '}';
+        return "Pedido{" +
+                "descricao='" + descricao + '\'' +
+                ", data=" + data +
+                ", web=" + web +
+                ", orderItems=" + orderItems +
+                ", solicitante=" + solicitante +
+                '}';
     }
 }
