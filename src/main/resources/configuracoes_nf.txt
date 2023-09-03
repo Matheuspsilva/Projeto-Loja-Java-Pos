@@ -1,0 +1,3 @@
+Minha Empresa de Exemplo
+123 Rua da Empresa, Cidade
+Outros dados de configuração...

@@ -1,9 +1,11 @@
 package com.example.demo;
 
-import com.example.demo.model.domain.*;
+import com.example.demo.domain.model.*;
+import com.example.demo.domain.service.GeradorNotaFiscalService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -16,7 +18,7 @@ class PedidoTest {
 	//1.2 As classes de teste precisam ter pelo menos três instâncias dos
 	//objetos.
 	@Test
-	void criarPedidoComSucesso() {
+	void criarPedidoComSucesso() throws IOException {
 
 		Produto coca = new Bebida("Coca-Cola", 5.0f, 1, true, 1.0f, "Coca-Cola", 500.0f);
 		Produto fanta = new Bebida("Fanta", 5.0f, 2, true, 1.0f, "Coca-Cola", 500.0f);
@@ -48,10 +50,12 @@ class PedidoTest {
 		OrderItem orderItem8 = new OrderItem(cachorroQuente, 2);
 		OrderItem orderItem9 = new OrderItem(bolo, 1);
 
+		GeradorNotaFiscalService geradorNotaFiscalService = new GeradorNotaFiscalService();
+
 		//Criação de Pedidos
-		Pedido pedido1 = new Pedido("Pedido 1", LocalDateTime.now(), true, List.of(orderItem1, orderItem2, orderItem3), solicitante1);
-		Pedido pedido2 = new Pedido("Pedido 2", LocalDateTime.now(), true, List.of(orderItem4, orderItem5, orderItem6), solicitante2);
-		Pedido pedido3 = new Pedido("Pedido 3", LocalDateTime.now(), true, List.of(orderItem7, orderItem8, orderItem9), solicitante3);
+		Pedido pedido1 = new Pedido("Pedido 1", LocalDateTime.now(), true, List.of(orderItem1, orderItem2, orderItem3), solicitante1, geradorNotaFiscalService, "71628381726387");
+		Pedido pedido2 = new Pedido("Pedido 2", LocalDateTime.now(), true, List.of(orderItem4, orderItem5, orderItem6), solicitante2, geradorNotaFiscalService, "98132901802343");
+		Pedido pedido3 = new Pedido("Pedido 3", LocalDateTime.now(), true, List.of(orderItem7, orderItem8, orderItem9), solicitante3, geradorNotaFiscalService, "89294837298347");
 
 		String[] cumpons = {"CUPOM1", "CUPOM2", "CUPOM3"};
 		pedido1.setCumpons(cumpons);

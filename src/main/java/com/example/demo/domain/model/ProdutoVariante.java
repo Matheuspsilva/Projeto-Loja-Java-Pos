@@ -1,4 +1,4 @@
-package com.example.demo.model.domain;
+package com.example.demo.domain.model;
 
 public class ProdutoVariante {
 

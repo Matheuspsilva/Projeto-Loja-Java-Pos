@@ -1,8 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.model.domain.Comida;
-import com.example.demo.model.domain.Produto;
-import com.example.demo.model.domain.Solicitante;
+import com.example.demo.domain.model.Solicitante;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

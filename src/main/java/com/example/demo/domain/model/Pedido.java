@@ -1,5 +1,8 @@
-package com.example.demo.model.domain;
+package com.example.demo.domain.model;
 
+import com.example.demo.domain.service.GeradorNotaFiscalService;
+
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -24,18 +27,23 @@ public class Pedido {
     //3.2 Criação de um atributo do tipo Set.
     private Set<String> tags;
 
+    private String numero;
 
-    public Pedido(String descricao, LocalDateTime data, boolean web, List<OrderItem> orderItems, Solicitante solicitante) {
+
+    public Pedido(String descricao, LocalDateTime data, boolean web, List<OrderItem> orderItems, Solicitante solicitante,GeradorNotaFiscalService gerador, String numero){
         this.descricao = descricao;
         this.data = data;
         this.web = web;
         this.orderItems = orderItems;
         this.solicitante = solicitante;
+        this.numero = numero;
 
         // Estabeleça a relação bidirecional entre Pedido e OrderItem
         for (OrderItem item : orderItems) {
             item.setPedido(this);
         }
+
+        gerador.gerarNotaFiscal(this);
     }
 
     public String getDescricao() {
@@ -92,6 +100,22 @@ public class Pedido {
 
     public void setTags(Set<String> tags) {
         this.tags = tags;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public float calcularTotal() {
+        float total = 0;
+        for (OrderItem item : orderItems) {
+            total += item.calcularValorTotal();
+        }
+        return total;
     }
 
     //1.3 Todas as classes de domínio precisam ter o toString

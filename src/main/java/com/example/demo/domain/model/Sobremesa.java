@@ -1,31 +1,28 @@
-package com.example.demo.model.domain;
+package com.example.demo.domain.model;
 
-public class Comida extends Produto{
+public class Sobremesa extends Produto{
 
     //1.1 Todas as classes precisam ter pelo menos três atributos e todos
     //os tipos de dados precisam ser utilizados em pelo menos uma
     //ocorrência.
 
-    float peso;
-    boolean vegano;
-    String ingredientes;
-
     float quantidade;
+    boolean doce;
+    String informacoes;
 
-    public Comida(String nome, float valor, int codigo, float peso, boolean vegano, String ingredientes, float quantidade) {
+    public Sobremesa(String nome, float valor, int codigo, boolean doce, String informacoes, float quantidade) {
         this.nome = nome;
         this.valor = valor;
         this.codigo = codigo;
-        this.peso = peso;
-        this.vegano = vegano;
-        this.ingredientes = ingredientes;
         this.quantidade = quantidade;
+        this.doce = doce;
+        this.informacoes = informacoes;
     }
 
     //1.3 Todas as classes de domínio precisam ter o toString
     //implementado.
     public String toString(){
-        return "Comida{" + "nome=" + nome + ", valor=" + valor + ", codigo=" + codigo + ", peso=" + peso + ", vegano=" + vegano + ", ingredientes=" + ingredientes + '}';
+        return "Sobremesa{" + "nome=" + nome + ", valor=" + valor + ", codigo=" + codigo + ", quantidade=" + quantidade + ", doce=" + doce + ", informacoes=" + informacoes + '}';
     }
 
     //3.2 Cada filha precisa implementar diferentemente o método abstrato.
